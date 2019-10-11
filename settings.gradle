@@ -1,0 +1,11 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+
+
+include 'fabric8-4.1.0'
+include 'fabric8-4.6.0'
+

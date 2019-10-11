@@ -1,0 +1,71 @@
+buildscript {
+    ext {
+        springBootVersion = "2.1.7.RELEASE"
+//        dubboVersion = "2.7.1"
+//        springCloudVersion = "Greenwich.RELEASE"
+//        springCloudAlibabaVersion = "0.2.1.RELEASE"
+        lombokVersion = "1.18.6"
+        helmNamespace = "platform"
+        helmPrefix = "your.jfrog.io/$helmNamespace"
+        
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+
+
+plugins {
+//    id "com.jfrog.artifactory" version "4.9.6" apply false
+    id 'java-library'
+    id 'jacoco'
+    id 'groovy'
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
+
+allprojects {
+    
+    group = 'com.mars.test'
+    version = '1.0.0-SNAPSHOT'
+    
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        //maven { 
+        //    url "https://your.jfrog.io//gradle-dev/"
+        //    credentials {
+        //        username = "${artifactory_user}"
+        //        password = "${artifactory_password}"
+        //    }
+        //}
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    sourceCompatibility = '11'
+    //apply from: "$rootProject.projectDir/gradle/helm.gradle"
+    //apply plugin: 'jacoco'
+
+    if(project.file('src/main/groovy').exists()){
+        apply plugin: 'groovy'
+    }
+//    if(!project.name.contains('api')){
+//        apply plugin: 'org.springframework.boot'
+//        apply plugin: 'io.spring.dependency-management'
+//        apply from: "$rootProject.projectDir/gradle/helm.gradle"
+//        apply plugin: 'jacoco'
+//
+//    }
+
+}
+//buildScan {
+//    setTermsOfServiceAgree("yes")
+//    if (System.getenv("JENKINS_NAME")?.length() > 0) {
+//        publishAlways()
+//        tag("CI:JENKINS")
+//    }
+//}
