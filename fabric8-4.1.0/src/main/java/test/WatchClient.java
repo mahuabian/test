@@ -2,12 +2,13 @@ package test;
 
 import io.fabric8.kubernetes.api.model.EndpointAddress;
 import io.fabric8.kubernetes.api.model.Endpoints;
-import io.fabric8.kubernetes.client.*;
+import io.fabric8.kubernetes.client.DefaultKubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientException;
+import io.fabric8.kubernetes.client.Watcher;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static okhttp3.TlsVersion.TLS_1_0;
 
 /**
  * 2019-10-11 14:55
@@ -20,7 +21,7 @@ public class WatchClient {
 
     static String ns = "auth";
 
-    static String serviceName = "authentication-service";
+    static String serviceName = System.getProperty("service","authentication-facade");
 
     public static void main(String[] args) {
 
@@ -33,7 +34,7 @@ public class WatchClient {
         KubernetesClient kubernetesClient = new DefaultKubernetesClient();
 
 
-        System.out.println("Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());
+        System.out.println("4.1.0 Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());
 
 
 
@@ -48,7 +49,7 @@ public class WatchClient {
                                 System.out.println(action +"  : " + dump(endpoints));
                                 return;
                             case DELETED:
-                                System.out.println("DELETED :" + endpoints);
+                                System.out.println("4.1.0 DELETED :" + endpoints);
                         }
                     }
 
@@ -64,7 +65,7 @@ public class WatchClient {
                     .withName(serviceName)
                     .get();
 
-            System.out.println("get : " +  dump(endpoints));
+            System.out.println("4.1.0 get : " +  dump(endpoints));
 
             try {
                 Thread.sleep(3000L);

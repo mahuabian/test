@@ -20,7 +20,7 @@ public class WatchClient {
 
     static String ns = "auth";
 
-    static String serviceName = "authentication-service";
+    static String serviceName = System.getProperty("service","authentication-facade");
 
     public static void main(String[] args) {
 
@@ -33,7 +33,7 @@ public class WatchClient {
         KubernetesClient kubernetesClient = new DefaultKubernetesClient();
 
 
-        System.out.println("Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());
+        System.out.println("4.6.0 Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());
 
 
 
@@ -48,7 +48,7 @@ public class WatchClient {
                                 System.out.println(action +"  : " + dump(endpoints));
                                 return;
                             case DELETED:
-                                System.out.println("DELETED :" + endpoints);
+                                System.out.println("4.6.0 DELETED :" + endpoints);
                         }
                     }
 
@@ -64,7 +64,7 @@ public class WatchClient {
                     .withName(serviceName)
                     .get();
 
-            System.out.println("get : " +  dump(endpoints));
+            System.out.println("4.6.0 get : " +  dump(endpoints));
 
             try {
                 Thread.sleep(3000L);
