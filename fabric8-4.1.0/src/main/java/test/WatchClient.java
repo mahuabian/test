@@ -24,13 +24,13 @@ public class WatchClient {
 
     public static void main(String[] args) {
 
-        Config config = new ConfigBuilder()
-                .withTrustCerts(true)
-                .withTlsVersions(TLS_1_0)
-                .withNamespace(ns)
-                .build();
+//        Config config = new ConfigBuilder()
+//                .withTrustCerts(true)
+//                .withTlsVersions(TLS_1_0)
+//                .withNamespace(ns)
+//                .build();
 
-        KubernetesClient kubernetesClient = new DefaultKubernetesClient(config);
+        KubernetesClient kubernetesClient = new DefaultKubernetesClient();
 
 
         System.out.println("Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());
