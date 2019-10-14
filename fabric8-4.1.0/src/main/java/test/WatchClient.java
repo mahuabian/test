@@ -2,10 +2,7 @@ package test;
 
 import io.fabric8.kubernetes.api.model.EndpointAddress;
 import io.fabric8.kubernetes.api.model.Endpoints;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
-import io.fabric8.kubernetes.client.KubernetesClient;
-import io.fabric8.kubernetes.client.KubernetesClientException;
-import io.fabric8.kubernetes.client.Watcher;
+import io.fabric8.kubernetes.client.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,19 +16,17 @@ public class WatchClient {
 
 
 
-    static String ns = "auth";
+    static String ns = System.getProperty("ns","auth");
 
     static String serviceName = System.getProperty("service","authentication-facade");
 
     public static void main(String[] args) {
 
-//        Config config = new ConfigBuilder()
-//                .withTrustCerts(true)
-//                .withTlsVersions(TLS_1_0)
-//                .withNamespace(ns)
-//                .build();
+        Config config = new ConfigBuilder()
+                .withNamespace(ns)
+                .build();
 
-        KubernetesClient kubernetesClient = new DefaultKubernetesClient();
+        KubernetesClient kubernetesClient = new DefaultKubernetesClient(config);
 
 
         System.out.println("4.1.0 Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());

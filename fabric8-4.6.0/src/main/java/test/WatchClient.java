@@ -7,8 +7,6 @@ import io.fabric8.kubernetes.client.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static okhttp3.TlsVersion.TLS_1_0;
-
 /**
  * 2019-10-11 14:55
  *
@@ -18,19 +16,17 @@ public class WatchClient {
 
 
 
-    static String ns = "auth";
+    static String ns = System.getProperty("ns","auth");
 
     static String serviceName = System.getProperty("service","authentication-facade");
 
     public static void main(String[] args) {
 
-//        Config config = new ConfigBuilder()
-//                .withTrustCerts(true)
-//                .withTlsVersions(TLS_1_0)
-//                .withNamespace(ns)
-//                .build();
+        Config config = new ConfigBuilder()
+                .withNamespace(ns)
+                .build();
 
-        KubernetesClient kubernetesClient = new DefaultKubernetesClient();
+        KubernetesClient kubernetesClient = new DefaultKubernetesClient(config);
 
 
         System.out.println("4.6.0 Server kubernetesClient: " + kubernetesClient.getVersion().getGitVersion());
